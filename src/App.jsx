@@ -6,15 +6,34 @@ import { login, logout } from './store/authSlice';
 import { Footer, Header } from './components'
 import { Outlet } from 'react-router-dom';
 
-
 function App() {
 
-  return (
-    <>
-      <h1 className=''>BLOG PROJECT</h1>
-      <Button className={`bg-red-500 cursor-pointer`}>Click me</Button>
-    </>
-  )
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    authService.getCurrentUser()
+    .then((userData) => {
+      if(userData) {
+        dispatch(login(userData))
+      } else{
+        dispatch(logout())
+      }
+    })
+    .finally(() => setLoading(false))
+  }, [])
+  
+  return !loading ? (
+    <div className='min-h-screen flex flex-wrap content-between by-gray-400'>
+      <div className='w-full block'>
+        <Header />
+        <main>
+          TODO: <Outlet/>
+        </main>
+        <Footer />
+      </div>
+    </div>
+  ) : null
 }
 
 export default App
