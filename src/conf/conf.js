@@ -1,9 +1,14 @@
 // src/conf/conf.js
-export const conf = {
-    appWriteUrl:           import.meta.env.VITE_APPWRITE_URL,
-    appWriteProjectId:     import.meta.env.VITE_APPWRITE_PROJECT_ID,
-    appWriteDatabaseId:    import.meta.env.VITE_APPWRITE_DATABASE_ID,
-    appWriteCollectionId:  import.meta.env.VITE_APPWRITE_COLLECTION_ID,
-    appWriteBucketId:      import.meta.env.VITE_APPWRITE_BUCKET_ID,
-};
-export default conf;  
+const conf = {
+    appwriteUrl:         String(import.meta.env.VITE_APPWRITE_URL),
+    appwriteProjectId:   String(import.meta.env.VITE_APPWRITE_PROJECT_ID),
+    appwriteDatabaseId:  String(import.meta.env.VITE_APPWRITE_DATABASE_ID),
+    appwriteCollectionId:String(import.meta.env.VITE_APPWRITE_COLLECTION_ID),
+    appwriteBucketId:    String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
+  
+    // ← New Cloudinary entries:
+    cloudinaryCloudName: String(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME),
+    cloudinaryUploadPreset: String(import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET),
+  };
+  
+  export default conf;  

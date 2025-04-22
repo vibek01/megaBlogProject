@@ -1,31 +1,42 @@
-import React, { useId } from 'react';
+// src/components/Select.jsx
+import React, { forwardRef } from "react";
 
-function Select({
-    options,
-    label,
-    className,
-    ...props
-}, ref) {
+const Select = forwardRef(function Select(
+  { label, options = [], error, className = "", ...props },
+  ref
+) {
+  return (
+    <div className="form-control w-full mb-4">
+      {label && (
+        <label className="label">
+          <span className="label-text">{label}</span>
+        </label>
+      )}
 
-    const id = useId();
+      <select
+        ref={ref}
+        className={`
+          select select-bordered w-full
+          focus:outline-none focus:ring-2 focus:ring-secondary
+          ${error ? "select-error" : ""}
+          ${className}
+        `}
+        {...props}
+      >
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
 
-    return (
-        <div className='w-full'>
-            {label && <label htmlFor={id} className=''></label>}
-            <select
-            {...props}
-            id={id}
-            ref={ref}
-            className={`px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full ${className}`}
-            >
-                {options?.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
-            </select>
-        </div>
-    )
-}
+      {error && (
+        <label className="label">
+          <span className="label-text-alt text-red-500">{error}</span>
+        </label>
+      )}
+    </div>
+  );
+});
 
-export default React.forwardRef(Select);
+export default Select;
