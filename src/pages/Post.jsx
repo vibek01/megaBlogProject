@@ -1,3 +1,4 @@
+// src/pages/Post.jsx
 import React, { useEffect, useState } from 'react';
 import { Button, Container } from '../components';
 import service from '../appwrite/config';
@@ -23,22 +24,20 @@ export default function Post() {
   const isAuthor = user?.$id === post.userid;
 
   return (
-    <div className="w-full bg-neutral py-12">
-      <Container>
-        <div className="w-full mb-6 rounded-lg overflow-hidden shadow-lg">
+    <div className="w-full bg-neutral py-12 px-4">
+      <Container className="space-y-6">
+        <div className="overflow-hidden rounded-lg shadow-lg">
           <img
             src={post.featuredImage}
             alt={post.title}
-            className="w-full object-cover"
+            className="w-full object-cover transform transition-transform duration-500 hover:scale-105"
           />
         </div>
 
         {isAuthor && (
-          <div className="flex space-x-2 mb-6">
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
             <Link to={`/edit-post/${post.$id}`}>
-              <Button className="bg-secondary hover:bg-secondary-dark">
-                Edit
-              </Button>
+              <Button>Edit</Button>
             </Link>
             <Button
               className="bg-red-500 hover:bg-red-600"
@@ -51,9 +50,7 @@ export default function Post() {
           </div>
         )}
 
-        <h1 className="text-4xl font-bold text-primary mb-4">
-          {post.title}
-        </h1>
+        <h1 className="text-4xl font-bold text-primary">{post.title}</h1>
         <div className="prose prose-slate max-w-none">
           {parse(post.content)}
         </div>

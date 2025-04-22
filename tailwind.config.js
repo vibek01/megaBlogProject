@@ -1,18 +1,25 @@
 // tailwind.config.js
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary:           "#334155",   // slate-700
-        "primary-dark":    "#1E293B",   // slate-800
-        secondary:         "#06B6D4",   // sky-500
-        "secondary-dark":  "#075985",   // sky-700
-        accent:            "#F59E0B",   // amber-500
-        "accent-dark":     "#B45309",   // amber-700
-        neutral:           "#E2E8F0",   // slate-200
-        "neutral-content": "#334155",   // slate-700
-        "base-100":        "#F1F5F9",   // slate-100
+        primary: '#334155',
+        'primary-dark': '#1E293B',
+        secondary: '#06B6D4',
+        'secondary-dark': '#075985',
+        accent: '#F59E0B',
+        'accent-dark': '#B45309',
+        neutral: '#E2E8F0',
+        'neutral-content': '#334155',
+        'base-100': '#F1F5F9',
+        'base-content': '#1E293B',
+      },
+      transitionTimingFunction: {
+        'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+      transitionDuration: {
+        300: '300ms',
       },
     },
   },
@@ -24,19 +31,19 @@ module.exports = {
     themes: [
       {
         megablog: {
-          primary:             "#334155",
-          "primary-content":   "#FFFFFF",
-          secondary:           "#06B6D4",
-          "secondary-content": "#FFFFFF",
-          accent:              "#F59E0B",
-          "accent-content":    "#FFFFFF",
-          neutral:             "#E2E8F0",
-          "neutral-content":   "#334155",
-          "base-100":          "#F1F5F9",
-          "base-content":      "#1E293B", // 👈 Add this line to make text in inputs visible
+          primary: '#334155',
+          'primary-content': '#FFFFFF',
+          secondary: '#06B6D4',
+          'secondary-content': '#FFFFFF',
+          accent: '#F59E0B',
+          'accent-content': '#FFFFFF',
+          neutral: '#E2E8F0',
+          'neutral-content': '#334155',
+          'base-100': '#F1F5F9',
+          'base-content': '#1E293B',
         },
       },
     ],
-    defaultTheme: "megablog",
+    defaultTheme: 'megablog',
   },
 };

@@ -1,8 +1,18 @@
+// src/pages/Home.jsx
 import React, { useEffect, useState } from 'react';
 import appwriteService from '../appwrite/config';
 import PostCard from '../components/PostCard';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+
+const sectionFade = {
+  hidden: { opacity: 0, y: 30 },
+  visible: i => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: 'easeOut' }
+  })
+};
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -10,62 +20,80 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    appwriteService.getPosts().then(res => {
-      if (res) setPosts(res.documents);
-    });
+    appwriteService.getPosts().then(res => res && setPosts(res.documents));
   }, []);
 
   return (
     <main className="w-full">
-      {/* Hero (full‑width bg) */}
-      <section className="w-full bg-gradient-to-r from-primary to-secondary text-primary-content">
+      {/* Hero */}
+      <motion.section
+        className="w-full bg-gradient-to-r from-primary to-secondary text-primary-content"
+        initial="hidden"
+        animate="visible"
+        variants={sectionFade}
+        custom={0}
+      >
         <div className="max-w-7xl mx-auto px-4 py-20 text-center">
           <motion.h1
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl font-extrabold mb-4"
+            className="text-5xl md:text-6xl font-extrabold mb-4"
           >
             Welcome to MyBlog
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-xl mb-8 animate-pulse"
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-xl md:text-2xl mb-8"
           >
             Discover articles, tutorials & more.
           </motion.p>
           <motion.button
             whileHover={{ scale: 1.05 }}
-            className="btn btn-accent btn-lg"
+            className="btn btn-accent btn-lg transition-all duration-300"
             onClick={() => navigate('/add-post')}
           >
             Get Started
           </motion.button>
         </div>
-      </section>
+      </motion.section>
 
       {/* Categories */}
-      <section className="w-full bg-base-100">
+      <motion.section
+        className="w-full bg-base-100"
+        initial="hidden"
+        animate="visible"
+        variants={sectionFade}
+        custom={1}
+      >
         <div className="max-w-7xl mx-auto px-4 py-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-6">Categories</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {categories.map(cat => (
+            {categories.map((cat, idx) => (
               <motion.div
                 key={cat}
+                custom={idx}
+                variants={sectionFade}
                 whileHover={{ scale: 1.03 }}
-                className="card bg-white shadow hover:shadow-lg transition p-4 text-center rounded-lg cursor-pointer"
+                className="card bg-white shadow-md hover:shadow-lg transition-transform duration-300 p-4 text-center rounded-lg cursor-pointer"
               >
                 <span className="font-medium text-gray-800">{cat}</span>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Latest Posts */}
-      <section className="w-full bg-neutral">
+      <motion.section
+        className="w-full bg-neutral"
+        initial="hidden"
+        animate="visible"
+        variants={sectionFade}
+        custom={2}
+      >
         <div className="max-w-7xl mx-auto px-4 py-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">Latest Posts</h2>
           {posts.length === 0 ? (
@@ -78,10 +106,16 @@ export default function Home() {
             </div>
           )}
         </div>
-      </section>
+      </motion.section>
 
       {/* Newsletter CTA */}
-      <section className="w-full bg-secondary-dark text-secondary-content">
+      <motion.section
+        className="w-full bg-secondary-dark text-secondary-content"
+        initial="hidden"
+        animate="visible"
+        variants={sectionFade}
+        custom={3}
+      >
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="max-w-md mx-auto text-center">
             <h3 className="text-2xl font-semibold mb-4">Stay Updated</h3>
@@ -90,15 +124,18 @@ export default function Home() {
               <input
                 type="email"
                 placeholder="Your email"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-white text-black transition-all duration-300"
               />
-              <button type="submit" className="btn btn-primary w-full sm:w-auto">
+              <button
+                type="submit"
+                className="btn btn-primary w-full sm:w-auto transition-all duration-300"
+              >
                 Subscribe
               </button>
             </form>
           </div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

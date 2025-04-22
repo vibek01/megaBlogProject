@@ -1,9 +1,11 @@
+// src/pages/AllPosts.jsx
 import React, { useState, useEffect } from 'react';
 import { PostCard } from '../components';
 import appwriteService from '../appwrite/config';
 
 export default function AllPosts() {
   const [posts, setPosts] = useState([]);
+
   useEffect(() => {
     appwriteService.getPosts().then(res => {
       if (res) setPosts(res.documents);
@@ -11,8 +13,8 @@ export default function AllPosts() {
   }, []);
 
   return (
-    <div className="w-full bg-neutral py-12">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="w-full bg-neutral py-12 px-4">
+      <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-primary mb-6">All Posts</h1>
         {posts.length === 0 ? (
           <p className="text-gray-500">No posts to display.</p>
