@@ -1,12 +1,35 @@
-# React + Vite
+# 📝 MegaBlogProject
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-featured modern blog application built using **React**, **Tailwind CSS**, **Appwrite**, and **Cloudinary**. It includes user authentication, a rich text editor for creating posts, image uploads, and a responsive, production-ready UI.
 
-Currently, two official plugins are available:
+> ⚡ Built during my 2nd year B.Tech CSE journey with the guidance of the *Chai aur Code* React playlist.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+🔗 [Visit the Live App](https://reactblogproject.vercel.app)
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📌 Features
+
+- 🔐 **Authentication** (Signup/Login) with Appwrite
+- ✍️ **Rich Text Editor** powered by TinyMCE
+- 📦 Image Upload & Fetch using Cloudinary
+- 🧠 Context API + custom state management
+- 💻 Responsive UI with Tailwind CSS + DaisyUI
+- ⚙️ Vite for blazing-fast development and builds
+- 🎨 Custom themed form inputs, navbar, footer, and post card layouts
+
+## 🛠 Tech Stack
+
+| Frontend | Backend Services | Deployment |
+|---------|------------------|------------|
+| React.js | Appwrite (Auth, DB) | Vercel |
+| Vite | Cloudinary (Images) | |
+| Tailwind CSS + DaisyUI | | |
+
+## 🧑‍💻 Installation
+
+1. **Clone the Repository:**
+
+```bash
+git clone https://github.com/vibek01/megaBlogProject.git
+cd megaBlogProject
