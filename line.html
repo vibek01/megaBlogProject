@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D Beveled Monochrome Skills Section</title>
+
+  <!-- TailwindCSS for layout + basic utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: #000000;
+      color: #eee;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 3rem 6rem;
+      justify-content: center;
+      align-items: start;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .segment {
+      position: relative;
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 2rem;
+    }
+
+    .segment.bottom {
+      grid-column: 1 / -1;
+    }
+
+    .skill-chip {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      background: #111;
+      border-radius: 12px;
+      cursor: pointer;
+      overflow: visible;
+      /* base inset shadows for depth */
+      box-shadow:
+        inset 4px 4px 8px rgba(0,0,0,0.9),
+        inset -4px -4px 8px rgba(255,255,255,0.05);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    /* highlight & shadow overlays */
+    .skill-chip::before,
+    .skill-chip::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    /* bright edge */
+    .skill-chip::before {
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.1),
+        transparent 60%
+      );
+    }
+    /* dark edge */
+    .skill-chip::after {
+      background: linear-gradient(
+        315deg,
+        rgba(0,0,0,0.7),
+        transparent 60%
+      );
+    }
+
+    .skill-chip:hover {
+      transform: rotateX(8deg) rotateY(8deg) scale(1.03);
+      box-shadow:
+        inset 6px 6px 12px rgba(0,0,0,1),
+        inset -6px -6px 12px rgba(255,255,255,0.1),
+        0 0 16px rgba(255,255,255,0.4);
+    }
+
+    .skill-logo {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 40px; height: 40px;
+      transform: translate(-50%, -50%);
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+
+    .skill-chip:hover .skill-logo {
+      transform: translate(-50%, -50%) rotate(360deg) scale(1.1);
+      filter: drop-shadow(0 0 8px #fff);
+    }
+
+    .invert {
+      filter: invert(1) brightness(1.5);
+    }
+
+    .skill-label {
+      position: absolute;
+      bottom: -1.6rem;
+      left: 50%;
+      transform: translate(-50%, 10px);
+      background: rgba(255,255,255,0.1);
+      color: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .skill-chip:hover .skill-label {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .segment-line {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: #555;
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { box-shadow: 0 0 6px rgba(255,255,255,0.2); }
+      to   { box-shadow: 0 0 14px rgba(255,255,255,0.4); }
+    }
+
+    @media (max-width: 768px) {
+      .skills-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .segment {
+        gap: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+      .skill-chip {
+        width: 70px;
+        height: 70px;
+      }
+      .skill-logo {
+        width: 28px;
+        height: 28px;
+      }
+      .skill-label {
+        bottom: -1.4rem;
+        font-size: 0.65rem;
+      }
+      .segment-line {
+        width: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 1rem; }
+      .segment {
+        gap: 1rem;
+        padding-bottom: 1rem;
+      }
+      .skill-chip {
+        width: 60px;
+        height: 60px;
+      }
+      .skill-logo {
+        width: 24px;
+        height: 24px;
+      }
+      .skill-label {
+        bottom: -1.2rem;
+        font-size: 0.6rem;
+      }
+      .segment-line {
+        width: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="skills-container">
+
+    <!-- Top-Left Segment -->
+    <div class="segment">
+      <div class="skill-chip">
+        <img
+          class="skill-logo"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+          alt="Node.js"
+        />
+        <span class="skill-label">Node.js</span>
+      </div>
+      <div class="skill-chip">
+        <img
+          class="skill-logo"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+          alt="React"
+        />
+        <span class="skill-label">React</span>
+      </div>
+      <div class="skill-chip">
+        <img
+          class="skill-logo invert"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+          alt="Express.js"
+        />
+        <span class="skill-label">Express.js</span>
+      </div>
+      <div class="segment-line"></div>
+    </div>
+
+    <!-- Top-Right Segment -->
+    <div class="segment">
+      <div class="skill-chip">
+        <img
+          class="skill-logo"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+          alt="Docker"
+        />
+        <span class="skill-label">Docker</span>
+      </div>
+      <div class="skill-chip">
+        <img
+          class="skill-logo"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+          alt="Git / GitHub"
+        />
+        <span class="skill-label">Git / GitHub</span>
+      </div>
+      <div class="skill-chip">
+        <img
+          class="skill-logo"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+          alt="MongoDB"
+        />
+        <span class="skill-label">MongoDB</span>
+      </div>
+      <div class="segment-line"></div>
+    </div>
+
+    <!-- Bottom Segment (spanning both columns) -->
+    <div class="segment bottom">
+      <div class="skill-chip">
+        <img
+          class="skill-logo"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+          alt="JavaScript"
+        />
+        <span class="skill-label">JavaScript</span>
+      </div>
+      <div class="skill-chip">
+        <img
+          class="skill-logo"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+          alt="HTML5"
+        />
+        <span class="skill-label">HTML5</span>
+      </div>
+      <div class="skill-chip">
+        <img
+          class="skill-logo invert"
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-line.svg"
+          alt="Next.js"
+        />
+        <span class="skill-label">Next.js</span>
+      </div>
+      <div class="segment-line"></div>
+    </div>
+
+  </div>
+</body>
+</html>
